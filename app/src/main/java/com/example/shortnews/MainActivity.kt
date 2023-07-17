@@ -4,11 +4,9 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shortnews.application.MyApplication
 import com.example.shortnews.databinding.ActivityMainBinding
@@ -17,9 +15,6 @@ import com.example.shortnews.models.News
 import com.example.shortnews.repository.Repository
 import com.example.shortnews.viewModels.MyViewModel
 import com.example.shortnews.viewModels.MyViewModelFactory
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.launch
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
@@ -147,8 +142,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun trendingNews(searchType: String) {
         newslist1 = ArrayList()
-        binding.recyclerView.visibility=View.GONE
-        binding.progressBar.visibility=View.GONE
 
 
         val calendar = Calendar.getInstance()
@@ -156,31 +149,13 @@ class MainActivity : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val previousDay = dateFormat.format(calendar.time)
 
-//        viewModel.getNews(searchType, previousDay, "5bc8f27a8cd74ccbbf7a5d678cb7b9cd")
-//            .observe(this) {
-//                newslist1= it.articles
-//                adapter= MyAdapter(this@MainActivity ,this@MainActivity ,newslist1)
-//                binding.recyclerView.adapter=adapter
-//                binding.recyclerView.layoutManager= LinearLayoutManager(this@MainActivity)
-//            }
-
-        lifecycleScope.launch {
-            viewModel.getNews(searchType, previousDay, "5bc8f27a8cd74ccbbf7a5d678cb7b9cd").onStart {
-               binding.progressBar.visibility= View.VISIBLE
-            }.onCompletion {
-                binding.progressBar.visibility= View.GONE
-                binding.recyclerView.visibility= View.VISIBLE
-            }.collect{
-
+        viewModel.getNews(searchType, previousDay, "5bc8f27a8cd74ccbbf7a5d678cb7b9cd")
+            .observe(this) {
                 newslist1= it.articles
                 adapter= MyAdapter(this@MainActivity ,this@MainActivity ,newslist1)
                 binding.recyclerView.adapter=adapter
                 binding.recyclerView.layoutManager= LinearLayoutManager(this@MainActivity)
             }
-        }
-
-
-
 
     }
 
