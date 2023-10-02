@@ -48,8 +48,6 @@ class MyAdapter(val context: Context,val activity: Activity, val newsList: List<
                     )
                 )
 
-                // we are calling below method after
-                // setting our toolbar color.
                 openCustomTab(activity, customIntent.build(), Uri.parse(currentItem.url))
             })
         }
