@@ -18,7 +18,7 @@ import com.example.shortnews.databinding.ListItemBinding
 import com.example.shortnews.models.Article
 
 
-class MyAdapter(private val context: Context, private val activity: Activity, val newsList: List<Article>):
+class MyAdapter(private val context: Context, val activity: Activity, val newsList: List<Article>):
 
     RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
 
