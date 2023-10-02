@@ -5,7 +5,6 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -13,24 +12,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shortnews.application.MyApplication
 import com.example.shortnews.databinding.ActivityMainBinding
 import com.example.shortnews.models.Article
-import com.example.shortnews.models.News
 import com.example.shortnews.repository.Repository
 import com.example.shortnews.viewModels.MyViewModel
 import com.example.shortnews.viewModels.MyViewModelFactory
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import retrofit2.*
-import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-    lateinit var adapter: MyAdapter
-    lateinit var newslist1: List<Article>
-    lateinit var viewModel: MyViewModel
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: MyAdapter
+    private lateinit var newsList1: List<Article>
+    private lateinit var viewModel: MyViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -146,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun trendingNews(searchType: String) {
-        newslist1 = ArrayList()
+        newsList1 = ArrayList()
         binding.recyclerView.visibility=View.GONE
         binding.progressBar.visibility=View.GONE
 
@@ -172,8 +168,8 @@ class MainActivity : AppCompatActivity() {
                 binding.recyclerView.visibility= View.VISIBLE
             }.collect{
 
-                newslist1= it.articles
-                adapter= MyAdapter(this@MainActivity ,this@MainActivity ,newslist1)
+                newsList1= it.articles
+                adapter= MyAdapter(this@MainActivity ,this@MainActivity ,newsList1)
                 binding.recyclerView.adapter=adapter
                 binding.recyclerView.layoutManager= LinearLayoutManager(this@MainActivity)
             }
