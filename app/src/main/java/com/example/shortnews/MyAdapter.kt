@@ -41,8 +41,6 @@ class MyAdapter(val context: Context,val activity: Activity, val newsList: List<
             expandNews .setOnClickListener(View.OnClickListener { // initializing object for custom chrome tabs.
                 val customIntent = CustomTabsIntent.Builder()
 
-                // below line is setting toolbar color
-                // for our custom chrome tab.
                 customIntent.setToolbarColor(
                     ContextCompat.getColor(
                         context,
