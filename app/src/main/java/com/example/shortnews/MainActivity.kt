@@ -27,7 +27,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     lateinit var adapter: MyAdapter
     lateinit var newslist1: List<Article>
     lateinit var viewModel: MyViewModel
