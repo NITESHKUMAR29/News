@@ -18,7 +18,7 @@ import com.example.shortnews.databinding.ListItemBinding
 import com.example.shortnews.models.Article
 
 
-class MyAdapter(val context: Context,val activity: Activity, val newsList: List<Article>):
+class MyAdapter(private val context: Context, private val activity: Activity, val newsList: List<Article>):
 
     RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
 
@@ -41,8 +41,6 @@ class MyAdapter(val context: Context,val activity: Activity, val newsList: List<
             expandNews .setOnClickListener(View.OnClickListener { // initializing object for custom chrome tabs.
                 val customIntent = CustomTabsIntent.Builder()
 
-                // below line is setting toolbar color
-                // for our custom chrome tab.
                 customIntent.setToolbarColor(
                     ContextCompat.getColor(
                         context,
@@ -50,8 +48,6 @@ class MyAdapter(val context: Context,val activity: Activity, val newsList: List<
                     )
                 )
 
-                // we are calling below method after
-                // setting our toolbar color.
                 openCustomTab(activity, customIntent.build(), Uri.parse(currentItem.url))
             })
         }
