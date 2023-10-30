@@ -11,7 +11,7 @@ class MyViewModel(private val repository: Repository): ViewModel() {
 
     fun getNews(q:String,from:String,apiKey:String):LiveData<News>{
         val data=MutableLiveData<News>()
-        repository.getNews(q,from,apiKey,data,error)
+        repository.getNews(q, from, apiKey, data, error)
         return data
     }
 

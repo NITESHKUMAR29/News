@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun trendingNews(searchType: String) {
+    fun trendingNews(searchType: String) {
         newslist1 = ArrayList()
 
 
